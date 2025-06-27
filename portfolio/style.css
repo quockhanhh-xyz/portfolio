@@ -1,0 +1,647 @@
+/** Portfolio site coded from scratch to be responsive and mobile-first for the University of Michigan "Web Design for Everybody: Basics of Web Development & Coding Specialization". Code was copy-pasted for evaluation purposes only, so some formatting might have been lost. Favicon and videos missing. **/
+
+/** z-index values:
+    • Back to top button   |  1-10
+    • Mobile / Sticky Menu | 11-20
+    • Mobile Menu Button   | 21-30
+    * Mobile Menu Links    | 31-40
+
+    Used to make sure that positioned overlapping elements are
+    in the correct order. **/
+    
+    body {
+        margin: 0;
+        font-size: 10px;
+    }
+
+    .mobileMenuLockBody {
+        overflow: hidden;
+    } /** Locks the body in position when the mobile menu is open. **/
+
+
+/** ===========================
+NAVIGATION | MOBILE MENU BUTTON
+=========================== **/
+
+    #mobileMenuButton {
+        position: fixed;
+        width: 25%;
+        padding-top: 25%;
+        z-index: 21;
+        border: none;
+        cursor: pointer;
+        clip-path: polygon(0 0, 100% 100%, 100% 0);
+        right: 0;
+        top: 0;
+        transition: 0.4s;
+    } /** Mobile navigation menu button clipped into a triangle
+          and placed on the top right corner. **/
+
+    @media (min-aspect-ratio: 20/27) {
+        #mobileMenuButton {
+            width: 15%;
+            padding-top: 15%;
+        }
+    } /** Reduces button size for mobile landscape screen ratios. **/
+
+    #mobileMenuButtonInset {
+        position: absolute;
+        z-index: 22;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(0 0, 20% 0, 100% 80%, 100% 100%);
+    } /** Clips a div positioned above the menu button to give
+          the appearence of "popping up". **/
+
+    @media (hover: none) {
+        #mobileMenuButton {
+            transition: 0.2s;
+        }
+    } /** A faster, more reactive transition for mobile devices. **/
+
+    @media (hover: hover) {
+        #mobileMenuButton:hover {
+            background-color: #d8502e;
+            width: 26%;
+            padding-top: 26%;
+        }
+    } /** Increases button size and color saturation on desktop devices on hover. **/
+
+    @media (hover: none) {
+        #mobileMenuButton:active {
+            background-color: #d8502e;
+            width: 28%;
+            padding-top: 28%;
+        }
+    } /** Increases button size (more than on desktop, to prevent users' fingers
+        obscuring the effect) and color saturation on mobile devices on click. **/
+
+    #mobileMenuBarContainer {
+        position: absolute;
+        z-index: 22;
+        top: 10%;
+        right: -65%;
+        width: 100%;
+        height: 100%;
+    }
+
+    #mobileMenuBar1, #mobileMenuBar2, #mobileMenuBar3 {
+        width: 23%;
+        height: 4%;
+        background-color: #ffeac3;
+        margin-top: 5%;
+    }
+
+    #mobileMenuBar1 {
+        margin-top: 0;
+    }
+
+
+/** ========================
+NAVIGATION | MOBILE MENU TOP
+======================== **/
+
+/** Mobile menu consists of two parts that move to 
+    fit together when the menu button is pressed. **/
+
+    #mobileMenuContainer {
+        position: fixed;
+        z-index: 12;
+        width: 100%;
+        height: 100%;
+        top: -120%;
+        transition: top 0.4s;
+        transition-timing-function: ease-out;
+    } /** Top part of the menu, where the links are. **/
+
+    @media only screen and (min-width: 568px) {
+        #mobileMenuContainer {
+            display: none;
+        }
+    } /** Hides the mobile menu top when shifting to the navbar. **/
+
+    #mobileMenuTop {
+        width: 100%;
+        height: 85%;
+    }
+
+    #mobileMenuTopTriangle {
+        position: absolute;
+        z-index: 16;
+        padding-top: 15%;
+        width: 100%;
+        clip-path: polygon(50% 100%, 35% 0, 65% 0);
+    } /** Decorative elements to fit the site theme. **/
+
+    #mobileMenuInset {
+        position: absolute;
+        z-index: 13;
+        width: 100%;
+        padding-top: 4%;
+    }
+
+    #mobileMenuLeftTriangleInset {
+        position: absolute;
+        z-index: 14;
+        width: 19%;
+        padding-top: 19%;
+        right: 50%;
+        clip-path: polygon(20% 0, 100% 0, 100% 100%, 20% 20%);
+    }
+
+    #mobileMenuRightTriangleInset {
+        position: absolute;
+        z-index: 15;
+        width: 19%;
+        padding-top: 19%;
+        left: 50%;
+        clip-path: polygon(0 0, 80% 0, 80% 20%, 0 100%);
+    }
+
+    .mobileMenuContainerShow {
+        top: 0 !important;
+    } /** Used in conjunction with JavaScript. **/
+
+/** ==========================
+NAVIGATION | MOBILE MENU LINKS
+========================== **/
+
+    #mobileMenuLinks {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        margin: 0 auto;
+        padding-top: 10vw;
+        z-index: 31;
+    } /** Default rules are for devices 320px to 450px wide. **/
+
+    #mobileMenuLinks a {
+        font-size: 5vw;
+        margin: 0 15vw 2vw 15vw;
+        padding-top: 5vw;
+        padding-bottom: 3.7vw;
+        display: block;
+        text-align: center;
+        transition: 0.3s;
+        border-top: 0.1vw solid transparent;
+    } /** I wanted to have the buttons "pressed down" when hovered, but to my displeasure
+          discovered that border changes shift all elements below even when counteracted
+          by padding changes. It's subtle, but noticeable enough and annoying. It's fixable
+          on most browsers by having the border start very small, transparent and using the
+          same unit as the padding (0.1vw) along with a slightly larger padding compensation
+          than what would be expected (3.7vw instead of 3.9vw).
+
+          Unfortunately, Firefox still borks it, hence the special rule below. Doesn't
+          completely fix it, just makes it as little noticeable as possible, until I
+          have the time to figure out an alternative method to create the same effect. **/
+
+    @supports (-moz-appearance:none) {
+        #mobileMenuLinks a {
+            padding-bottom: 3.9vw;
+            border-top: 0.1vw solid transparent;
+        } 
+    } /** Special rule for Firefox only. Read the above comment for the reason. **/
+
+    #mobileMenuLinks a:hover {
+        border-top: 4vw solid #55272f;
+        padding-bottom: 0;
+        transition: 0.3s;
+    } /** "Pressed down" state for the buttons. **/
+
+    #mobileMenuLinks a:last-of-type {
+        margin-bottom: 0;
+    }
+
+    #mobileMenuLinksTriangle {
+        margin: 0 auto;
+        width: 10vw;
+        height: 10vw;
+        clip-path: polygon(100% 0, 0 0, 50% 50%);
+    } /** Decorative element below the last button. **/
+
+    @media only screen and (min-width: 451px) {
+        #mobileMenuLinks {
+            padding-top: 6vw;
+        }
+        #mobileMenuLinks a {
+            font-size: 4vw;
+            margin: 0 20vw 2vw 20vw;
+        }
+    } /** Breakpoint changes for devices 451px to 600px wide. **/
+
+
+/** ===========================
+NAVIGATION | MOBILE MENU BOTTOM
+=========================== **/
+
+    #mobileMenuBottomContainer {
+        position: fixed;
+        z-index: 11;
+        width: 100%;
+        height: 100%;
+        bottom: -100%;
+        transition: 0.4s;
+        transition-timing-function: ease-out;
+    } /** Lower part of the menu. Purely decorative. **/
+
+    #mobileMenuBottomTriangleLeft {
+        position: absolute;
+        width: 50%;
+        padding-top: 50%;
+        bottom: 13%;
+        clip-path: polygon(0 70%, 70% 70%, 100% 100%, 0% 100%);
+    } /** Decorative element, along with those below, to fit the site theme.
+          Part of creating a "negative space" that fits into the top part of the menu. **/
+
+    #mobileMenuBottomTriangleRight {
+        position: absolute;
+        width: 50%;
+        padding-top: 50%;
+        bottom: 13%;
+        right: 0;
+        clip-path: polygon(30% 70%, 100% 70%, 100% 100%, 0% 100%);
+    }
+
+    #mobileMenuBottom {
+        position: absolute;
+        width: 100%;
+        height: 13%;
+        bottom: 0;
+    }
+
+    .mobileMenuBottomContainerShow {
+        bottom: 0 !important;
+    } /** Used in conjunction with JavaScript. **/
+
+
+/** ====================
+NAVIGATION | NAVBAR MENU
+==================== **/
+    
+    #navbarContainer {
+        display: none;
+        padding-top: 3%;
+        max-height: 164px;
+        margin: 0 auto;
+    } /** Sticky menu off by default, appears via 
+          JavaScript triggered by width changes. **/
+
+    @media only screen and (min-width: 900px) {
+        #navbarContainer {
+            padding-top: 27px;
+        }
+    }
+
+    #navbarDivContainer {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .navbarDiv {
+        display: inline-block;
+        width: 19.5%;
+        text-align: center;
+        border-right: 1px solid #b6482d;
+    } /** Divisions for the menu links. **/
+
+    .navbarDiv a {
+        font-size: 3vw;
+    } /** Menu link styling. **/
+
+    @media only screen and (min-width: 900px) {
+        .navbarDiv a {
+            font-size: 27px;
+        }
+    } /** Limits menu link styling past a certain point or the font
+          gets bigger than the containing div. **/
+
+    .navbarDiv a:hover {
+        text-decoration: underline;
+    } /** Default link underlining is off. Turns on when hovered. **/
+
+    @media only screen and (min-width: 568px) {
+        #mobileMenuButton, #mobileMenuContainer, #mobileMenuBottomContainer {
+            display: none;
+        }
+        #navbarContainer {
+            display: block;
+        }
+    } /** Removes the mobile menu elements at the 568px breakpoint,
+          or an iPhone 5 in landscape mode. Adds the landscape and
+          desktop navbar menu. **/
+
+    #navbarBottom {
+        height: 3vw;
+        max-height: 27px;
+    }
+
+    #navbarInset {
+        height: 17px;
+    } /** Decorative element, along with the "triangle" elements below. **/
+
+    #navbarTriangle {
+        position: absolute;
+        width: 90px;
+        padding-top: 90px;
+        max-width: 90px;
+        z-index: 13;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        clip-path: polygon(50% 50%, 100% 0, 0 0);
+    }
+
+    #navbarLeftTriangleInset {
+        position: absolute;
+        width: 90px;
+        padding-top: 90px;
+        z-index: 11;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        clip-path: polygon(0 0, 50% 0, 50% 69%, 0 19%);
+    }
+
+    #navbarRightTriangleInset {
+        position: absolute;
+        width: 90px;
+        padding-top: 90px;
+        z-index: 12;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        clip-path: polygon(100% 0, 100% 19%, 50% 69%, 50% 0);
+    }
+
+    #navbarBottomPadding {
+        height: 40px;
+    } /** Adds distance between the navbar menu
+          and the beginning of the content. **/
+
+
+/** ===========================
+NAVIGATION | BACK TO TOP BUTTON
+=========================== **/
+
+    #backToTopButton {
+        position: fixed;
+        width: 20%;
+        padding-top: 20%;
+        z-index: 1;
+        border: none;
+        cursor: pointer;
+        clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+        right: 0;
+        bottom: -40%;
+        transition: bottom 0.5s, background-color 0.4s, width, 0.4s, padding-top 0.4s;
+    } /** A headache of a button. CSS clips it into a triangle placed on the bottom right
+          of the screen. **/
+
+    @media (hover: none) {
+        #backToTopButton:active {
+            background-color: #d8502e;
+            width: 24%;
+            padding-top: 24%;
+        }
+    } /** Increases button size (more than on desktop, to prevent users' fingers
+          obscuring the effect) and color saturation on mobile devices on click. **/
+
+    @media only screen and (min-width: 568px) {
+        #backToTopButton {
+            width: 72px;
+            padding-top: 72px;
+        }
+    } /** Reduces button size for desktop sizes. **/
+
+    @media only screen and (min-width: 568px) {
+        #backToTopButton:hover {
+            width: 90px;
+            padding-top: 90px;
+        }
+    } /** Reduces button size on hover for desktop sizes. **/
+
+    #backToTopArrow {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-color: #ffeac3;
+        width: 100%;
+        height: 100%;
+        clip-path: polygon(69% 56%, 52% 85%, 87% 85%);
+    } /** The little up arrow on top of the button. Made with a clipped div. **/
+
+    .backToTopShow {
+        bottom: 0 !important;
+    } /** Used in conjunction with JavaScript to show or hide the button. **/
+
+
+/** ==============================
+LOSANGE TEXT + IMAGE CONTENT BLOCK 
+============================== **/
+
+    .losangeBlock {
+        margin: 0 auto;
+    } /** Content block includes both the image losange and accompanying text box,
+          but both parts can also be decoupled in the HTML if necessary without 
+          anything breaking too much. **/
+
+    @media only screen and (min-width: 568px) {
+        .losangeBlock {
+            margin-bottom: -20px;
+        }
+    } /** The need to have the text box decorative triangles be responsive and thus
+          retain their ratio (otherwise becoming distorted with screen changes) 
+          requires a clipped square <div>. However, the clipped part of the <div> is 
+          still there, requiring these little adjustments in other elements so they
+          mantain correct distance from each other. **/
+
+    .losangeBlock:first-of-type {
+        padding-top: 30px;
+    } /** Distance from the top of the body in mobile for the first content block. **/
+
+    @media only screen and (min-width: 568px) {
+        .losangeBlock:first-of-type {
+            padding-top: 60px;
+        }
+    } /** Larger distance from the top of the body in larger screens to account
+          for the navbar presence. **/
+
+    .losangeImageContainer {
+        position: relative;
+        margin: 0 auto;
+        max-width: 500px;
+        max-height: 500px;
+    } /** As I will be making the images / videos myself to conform with available
+          space, things relating to the image block are relatively simple. **/
+
+    .losangeImage {
+        width: 90%;
+        display: block;
+        margin: 0 auto;
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    .losangeInsetLeft {
+        width: 100%;
+        padding-top: 100%;
+        position: absolute;
+        top: -5%;
+        left: 0;
+        clip-path: polygon(5% 45%, 50% 0, 50% 5%, 5% 50%);
+    } /** The inset divs occupy the same area as the image container, 
+          but are clipped to only show a small area over the top left and right of the losange.
+          This solution mantains responsiveness while keeping the inset effect. **/
+
+    .losangeInsetRight {
+        width: 100%;
+        padding-top: 100%;
+        position: absolute;
+        top: -5%;
+        left: 0;
+        clip-path: polygon(50% 5%, 50% 0, 95% 45%, 95% 50%);
+    }
+
+    .losangeTextBoxContainer {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .losangeTextBoxTopTriangle { 
+        width: 20%;
+        padding-top: 20%;
+        margin: 0 auto;
+        margin-top: -5%;
+        clip-path: polygon(50% 50%, 0% 100%, 100% 100%);
+    } /** Why not keep the triangles part of a single clip-path 
+          encompassing the whole of .losangeTextBox?
+          Because a unified path stretched unevenly with width changes.
+          With this solution, the stretch ratio is fixed. **/
+
+    .losangeTextBox {
+        margin: 0 5%;
+        padding: 5% 10%;
+    }
+
+    .losangeTextBoxBottomTriangle {
+        width: 20%;
+        padding-top: 20%;
+        margin: 0 auto;
+        clip-path: polygon(50% 50%, 0 0, 100% 0);
+    }
+
+/** ====================
+COLORS | COLORS | COLORS 
+==================== **/
+
+/** Color, when possible, was separated from other properties to make global changes easier. 
+    Lower values assigned to brighter colors, higher to darker.
+    Color scheme uses contrasting colors: teal for background, magentas for menu and
+    interactive elements. Additionaly, colors are used to create the faux tridimensional
+    inset effects. **/
+
+    .teal1 {
+        background-color: #3c7070;
+    }
+
+    .teal2 {
+        background-color: #265a5a;
+    }
+
+    .teal3 {
+        background-color: #313855;
+    }
+
+    .teal4 {
+        background-color: #112424;
+    }
+
+    .magenta1 {
+        background-color: #a83030;
+    }
+
+    .magenta2 {
+        background-color: #b93d2d;
+    }
+
+    .magenta3 {
+        background-color: #7c2a2a;
+    }
+
+    .magenta4 {
+        background-color: #5f2525;
+    }
+
+    .magenta5 {
+        background-color: #7a2f35;
+    }
+
+    .magenta6 {
+        background-color: #55272f;
+    }
+
+    .magenta7 {
+        background-color: #4e2228;
+    }
+
+
+
+/** ======
+TYPOGRAPHY
+====== **/
+
+/** Typography, when possible, was separated from other 
+    properties to make global changes easier. **/
+
+    .textBoxTypo {
+        font-size: 1.5em;
+        font-family: Cabin, "Trebuchet MS", Helvetica, sans-serif;
+        color: #ffffff;
+        line-height: 2em;
+        letter-spacing: 0.02em;
+    }
+
+    @media only screen and (min-width: 568px) {
+        .textBoxTypo {
+            font-size: 1.7em;
+            line-height: 1.7em;
+        }
+    } /** Main text typography suffers some changes in bigger screens. **/
+
+    a { 
+        color: #ffe5b6;
+    }
+
+    a:visited {
+        color: #d1d1d1;
+    }
+
+    a:hover {
+        color: #ffffff;
+    }
+
+    a.menuTypo {
+        font-family: "Vollkorn", Georgia, serif;
+        color: #ffeac3;
+        text-decoration: none;
+        transition: 0.3s;    
+    }
+
+    a.menuTypo:hover {
+        color: #ffffff;
+    }
+
+/** === 
+UTILITY
+=== **/
+
+    .noBorders {
+        border: none;
+    }

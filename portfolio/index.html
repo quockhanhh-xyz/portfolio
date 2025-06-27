@@ -1,0 +1,357 @@
+<!-- Portfolio site coded from scratch to be responsive and mobile-first for the University of Michigan "Web Design for Everybody: Basics of Web Development & Coding Specialization". Code was copy-pasted for evaluation purposes only, so some formatting might have been lost. Favicon and videos missing. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>PDGPer</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- FONTS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cabin&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vollkorn&display=swap">
+    <!-- I linked to some Google Fonts for speed, but otherwise tried to keep
+         everything as self-contained as possible. -->
+
+    <!-- FAVICON-->
+    <link rel="icon" type="image/png" href="img/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="img/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="img/favicon/favicon-96x96.png" sizes="96x96">
+
+</head>
+
+
+
+<body class = "teal2">
+
+    <header>
+
+        <!-- ==========================
+        NAVIGATION | MOBILE MENU BUTTON    
+        =========================== -->
+        <nav>
+            <div id = "mobileMenuButton" class = "magenta1" onclick = "mobileMenuToggle()">
+                <div id = "mobileMenuButtonInset" class = "magenta2"></div>
+                <div id = "mobileMenuBarContainer">
+                    <div id = "mobileMenuBar1"></div>
+                    <div id = "mobileMenuBar2"></div>
+                    <div id = "mobileMenuBar3"></div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- ===================
+        NAVIGATION | MOBILE MENU
+        ==================== -->
+        <nav id = "mobileMenuContainer">
+            <div id = "mobileMenuTop" class = "magenta1"></div>
+                <div id = "mobileMenuLinks">
+                    <a class = "magenta3 menuTypo" href="#" onclick="teleportToBookmarkEssentials(); setTimeout(mobileMenuToggle, 250); return false;">Essentials</a>
+                    <!-- Links in mobile menu instantly go to location while the menu hides the change, but also activate the function that closes the menu. 
+                         A small delay prevents the change from being too sudden. -->
+                    <br>
+                    <a class = "magenta3 menuTypo" href="#" onclick="teleportToBookmarkLearnings(); setTimeout(mobileMenuToggle, 250); return false;">Learnings</a>
+                    <br>
+                    <a class = "magenta3 menuTypo" href="#" onclick="teleportToBookmarkFrames(); setTimeout(mobileMenuToggle, 250); return false;">Frames</a>
+                    <br>
+                    <a class = "magenta3 menuTypo" href="#" onclick="teleportToBookmarkGraphics(); setTimeout(mobileMenuToggle, 250); return false;">Graphics</a>
+                    <br>
+                    <a class = "magenta3 menuTypo" href="#" onclick="teleportToBookmarkCoding(); setTimeout(mobileMenuToggle, 250); return false;">Coding</a>
+                    <div id = "mobileMenuLinksTriangle" class = "magenta3"></div>
+                </div>
+            <div id = "mobileMenuTopTriangle" class = "magenta1"></div>
+            <div id = "mobileMenuInset" class = "magenta3"></div>
+            <div id = "mobileMenuLeftTriangleInset" class = "magenta2"></div>
+            <div id = "mobileMenuRightTriangleInset" class = "magenta6"></div>
+        </nav>
+
+        <div id = "mobileMenuBottomContainer">
+        <!-- As this is only a decorative element of the menu, I didn't use a <nav> element. -->
+            <div id = "mobileMenuBottomTriangleLeft" class= "magenta5"></div>
+            <div id = "mobileMenuBottomTriangleRight" class = "magenta5"></div>
+            <div id = "mobileMenuBottom" class = "magenta5"></div>
+        </div>
+
+
+        <!-- ===================
+        NAVIGATION | NAVBAR MENU 
+        ==================== -->
+        <nav id = "navbarContainer" class = "magenta1 menuTypo">
+            <div id = "navbarDivContainer">
+                <div class = "navbarDiv">
+                    <a class = "menuTypo" href="#" onclick="goToBookmarkEssentials(); return false;">Essentials</a>
+                    <!-- All navigation links are bookmarks. There are no external links. -->
+                </div>
+                <div class = "navbarDiv">
+                    <a class = "menuTypo" href="#" onclick="goToBookmarkLearnings(); return false;">Learnings</a>
+                </div>
+                <div class = "navbarDiv">
+                    <a class = "menuTypo" href="#" onclick="goToBookmarkFrames(); return false;">Frames</a>
+                </div>
+                <div class = "navbarDiv">
+                    <a class = "menuTypo" href="#" onclick="goToBookmarkGraphics(); return false;">Graphics</a>
+                </div>
+                <div class = "navbarDiv noBorders">
+                    <a class = "menuTypo" href="#" onclick="goToBookmarkCoding(); return false;">Coding</a>
+                </div>
+            </div>
+            <div id = "navbarBottom" class = "magenta1"></div>
+            <div id = "navbarInsetContainer">
+                <div id = "navbarInset" class = "magenta3">
+                    <div id = "navbarTriangle" class = "magenta1"></div>
+                    <div id = "navbarLeftTriangleInset" class = "magenta2"></div>
+                    <div id = "navbarRightTriangleInset" class = "magenta5"></div>
+                </div>
+            </div>
+            <div id = "navbarBottomPadding" class = "teal2"></div>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- ======================================
+        CONTENT | LOSANGE BLOCK (commented version)
+        ======================================= -->
+        <section class = "losangeBlock teal2"> 
+        <!-- For the landing page, each section is a block of text + image, so it can be easily copied and pasted. -->
+
+            <div class = "losangeImageContainer">
+            <!-- Container for the image / video block. -->
+                <video class = "losangeImage" autoplay loop muted>
+                    <source src = "vid/losange_portrait.mp4" type = "video/mp4">
+                </video>
+                <!-- Video uses a CSS clip-path to give it the losange shape.
+                    Originally was going to use CSS transform to achieve the effect, but that solution didn't allow responsiveness. -->
+                <div class = "losangeInsetLeft teal4"></div>
+                <!-- Adds the left "inset" shadow over the image.
+                    Originally to use borders to achieve the same effect.
+                    Had to discard that approach when I switched from transform to clip-path. -->
+                <div class = "losangeInsetRight teal3"></div>
+                <!-- Idem for the right "inset". -->
+            </div>
+
+            <div class = "losangeTextBoxContainer">
+            <!-- A div container for the text block elements. -->
+                <div class = "losangeTextBoxTopTriangle teal1"></div>
+                <!-- A div made to look like a triangle using clip-path CSS. -->
+                <div id = "bookmarkEssentials" class = "losangeTextBox textBoxTypo teal1">
+                <!-- Div containing the text itself. -->
+                    <p>Hello there. My name is DAVID NGUYEN [ <a href = "https://www.linkedin.com/in/pdgper/" target="_blank">LinkedIn</a> | <a href = "https://twitter.com/pdgper" target="_blank">Twitter</a> | <a href = "mailto: pdgper@gmail.com">Email</a> ] and I hail from sunny Portugal. I am currently living in Brighton, UK. If you’re in a hurry, here is the short of it:
+                        <br><br>
+                        • 16 years experience with <a href = "https://photos.app.goo.gl/HRptXdRryP4nKe2M9" target = "_blank">image editing programs</a> (e.g. Photoshop).<br>
+                        • 11 years with video editing (e.g. Premiere) <a href = "https://youtu.be/PEE-CXBeLdo" target = "_blank">with plenty of camerawork</a>.<br>
+                        • 2 with the CMS side of Wordpress.<br>
+                        • Fluent in Portuguese and English. Some conversational Spanish.
+                        <br><br>
+                        All learned in the service of various <a href = "https://youtu.be/fx0Flj_OcIU" target = "_blank">animation</a>, <a href = "https://photos.app.goo.gl/Y53KdYaLuTeNi85S7" target = "_blank">illustration</a>, <a href = "https://photos.app.goo.gl/K9eNk4yXJYaCaPWN7">design</a>, reporting, translation and communication projects. I've recently <a href = "https://www.coursera.org/user/8c8a177136a5c7294b61c2966da30d38" target="_blank">learned the basics of HTML, CSS, JavaScript and Bootstrap</a> and I am looking for work in the front-end web development area or adjacent. I already know the basics, as this portfolio website proves, <a href = "https://codepen.io/pdgper/pen/wvWvrqP" target = "_blank">having coded it from scratch</a>.
+                        <br><br>
+                        If you feel like doing some more reading and checking out some of my work, keep scrolling. I’ll try to keep it brief and entertaining.
+                    </p>
+                </div>
+                <div class = "losangeTextBoxBottomTriangle teal1"></div>
+                <!-- A div made to look like an upsidedown triangle using clip-path CSS. -->
+            </div>
+        </section>
+
+        <!-- ==================
+        CONTENT | LOSANGE BLOCK
+        =================== -->
+        <section id = "bookmarkLearnings" class = "losangeBlock teal2"> 
+            <div class = "losangeImageContainer">
+                <video class = "losangeImage" autoplay loop muted>
+                    <source src = "vid/losange_memory.mp4" type = "video/mp4">
+                </video>
+                <div class = "losangeInsetLeft teal4"></div>
+                <div class = "losangeInsetRight teal3"></div>
+            </div>
+            <div class = "losangeTextBoxContainer">
+                <div class = "losangeTextBoxTopTriangle teal1"></div>
+                <div class = "losangeTextBox textBoxTypo teal1">
+                    <p>When I was around 7 years old, my mother taught me how to make an electrical circuit using two wires, a lightbulb and a battery. I found this knowledge to be incredible and promptly tore apart all my broken toys in order to find out what was wrong with them. I even managed to fix a couple of them, to my great pride. Yes, it mostly came down to duct-taping loose wiring, but still, a defining triumph for a 7 year old.
+                        <br><br>
+                        That drive to figure out machines and all the things they are capable of remained as I got access to better hardware. First an IBM 486, where I monkeyed around in MS-DOS and Windows 3.1, followed by a long line of ever more powerful machines. Each one opened the door to new possibilities.
+                    </p>
+                </div>
+                <div class = "losangeTextBoxBottomTriangle teal1"></div>
+            </div>
+        </section>
+
+        <!-- ==================
+        CONTENT | LOSANGE BLOCK
+        =================== -->
+        <section class = "losangeBlock teal2"> 
+            <div class = "losangeImageContainer">
+                <video class = "losangeImage" autoplay loop muted>
+                    <source src = "vid/losange_college.mp4" type = "video/mp4">
+                </video>
+                <div class = "losangeInsetLeft teal4"></div>
+                <div class = "losangeInsetRight teal3"></div>
+            </div>
+            <div class = "losangeTextBoxContainer">
+                <div class = "losangeTextBoxTopTriangle teal1"></div>
+                <div class = "losangeTextBox textBoxTypo teal1">
+                    <p>As I was also surrounded by art my whole life, my efforts turned to join my interests together. I wanted to learn how to make movies and animation, using computers as part of the process.
+                        <br><br>
+                        So I got into "Arts and Multimedia" at the Faculty of Fine-Arts of the University of Lisbon in 2004. Everyone there seemed really keen on discussing what art is and no one appeared to care all that much about how to actually make it.
+                        <br><br>
+                        I only remember a handful of teachers that were serious about teaching us. The first paper we handed in to one of them, she flunked almost the entire class for plagiarism. Unlike the “who even knows what art is” crowd, she pushed us to always place purpose and clarity first in all we created. I still think that was by far the better lesson.
+                    </p>
+                </div>
+                <div class = "losangeTextBoxBottomTriangle teal1"></div>
+            </div>
+        </section>
+
+        <!-- ==================
+        CONTENT | LOSANGE BLOCK
+        =================== -->
+        <section id = "bookmarkFrames" class = "losangeBlock teal2"> 
+            <div class = "losangeImageContainer">
+                <video class = "losangeImage" autoplay loop muted>
+                    <source src = "vid/losange_animation.mp4" type = "video/mp4">
+                </video>
+                <div class = "losangeInsetLeft teal4"></div>
+                <div class = "losangeInsetRight teal3"></div>
+            </div>
+            <div class = "losangeTextBoxContainer">
+                <div class = "losangeTextBoxTopTriangle teal1"></div>
+                <div class = "losangeTextBox textBoxTypo teal1">
+                    <p>Despondent with my academic experience, I remained undeterred in my intentions. 
+                        I locked myself in the bedroom and spent three months learning by doing, making my first animation. 
+                        A trial by fire to ensure the editing process would sear into my brain. Out came <a href = "https://www.youtube.com/watch?v=fx0Flj_OcIU" target="_blank">“Big Bill Hell” (warning: graphic language)</a>, a manic piece. 
+                        I made a few more animations after that, but then history intervened.
+                    </p>
+                </div>
+                <div class = "losangeTextBoxBottomTriangle teal1"></div>
+            </div>
+        </section>
+
+        <!-- ==================
+        CONTENT | LOSANGE BLOCK
+        =================== -->
+        <section class = "losangeBlock teal2"> 
+            <div class = "losangeImageContainer">
+                <video class = "losangeImage" autoplay loop muted>
+                    <source src = "vid/losange_protests.mp4" type = "video/mp4">
+                </video>
+                <div class = "losangeInsetLeft teal4"></div>
+                <div class = "losangeInsetRight teal3"></div>
+            </div>
+            <div class = "losangeTextBoxContainer">
+                <div class = "losangeTextBoxTopTriangle teal1"></div>
+                <div class = "losangeTextBox textBoxTypo teal1">
+                    <p>The waves created by the 2008 crash had reached a crescendo and gigantic protests hit all the major cities of Portugal beginning in 2010. I got my faithful Canon and <a href = "https://youtu.be/PEE-CXBeLdo" target="_blank">made my way to the center of it all</a>. The first time I covered a demonstration, I ended up in the middle of a major police charge and captured the only footage of police assaulting an AFP reporter. I went back home and feverishly edited the video to put it up the same day. Overnight, it was well on its way to 50k views. All the major national television channels showed it. I was hooked.
+                    <br><br>
+                    The next few years I must have shot and edited thousand of hours of footage. They ended up all over the place, from Spanish debate programmes to <a href = "http://www.globaluprisings.org/lisbon-calling-november-14th-in-portugal/" target="_blank">crisis documentaries</a>.
+                    <br><br>
+                    Then, as suddenly as it all began, it ended in 2012 with a major police charge in front of Parliament.
+                    </p>
+                </div>
+                <div class = "losangeTextBoxBottomTriangle teal1"></div>
+            </div>
+        </section>
+
+        <!-- ==================
+        CONTENT | LOSANGE BLOCK
+        =================== -->
+        <section id = "bookmarkGraphics" class = "losangeBlock teal2"> 
+            <div class = "losangeImageContainer">
+                <video class = "losangeImage" autoplay loop muted>
+                    <source src = "vid/losange_logos.mp4" type = "video/mp4">
+                </video>
+                <div class = "losangeInsetLeft teal4"></div>
+                <div class = "losangeInsetRight teal3"></div>
+            </div>
+            <div class = "losangeTextBoxContainer">
+                <div class = "losangeTextBoxTopTriangle teal1"></div>
+                <div class = "losangeTextBox textBoxTypo teal1">
+                    <p>Part of self-publishing was dealing with social media a lot. It was also around this time that social networks began seriously kneecapping reach. Now the algorithm decided what the people wanted to see, and apparently what the people really wanted to see was a lot of Wish.com ads.
+                    <br><br>
+                        I went from having so much reach that my friends were sending me amused messages about their parents emailing them weird downrezed versions of my videos, to getting only hundreds of views. Not so amusing.
+                    <br><br>
+                        While I kept filming what happened in the streets, I also picked up freelance work revolving around the skills I already had or adjacent ones where I felt I needed a challenge to improve. I became <a href = "https://photos.app.goo.gl/HRptXdRryP4nKe2M9" target="_blank">a Photoshop afficionado</a>, <a href = "https://photos.app.goo.gl/PKrHAbYE2eAK2U2H8" target="_blank">illustrated a book about childhood stories</a>, did English translation, <a href = "https://photos.app.goo.gl/K9eNk4yXJYaCaPWN7" target="_blank">designed logos</a>, <a href = "https://photos.app.goo.gl/Y53KdYaLuTeNi85S7" target="_blank">posters</a> and throughout all this really began to enjoy the stories behind graphic and industrial design, and all the thought process and compromises that go into them.
+                    </p>
+                </div>
+                <div class = "losangeTextBoxBottomTriangle teal1"></div>
+            </div>
+        </section>
+
+        <!-- ==================
+        CONTENT | LOSANGE BLOCK
+        =================== -->
+        <section id = "bookmarkCoding" class = "losangeBlock teal2"> 
+            <div class = "losangeImageContainer">
+                <video class = "losangeImage" autoplay loop muted>
+                    <source src = "vid/losange_bored.mp4" type = "video/mp4">
+                </video>
+                <div class = "losangeInsetLeft teal4"></div>
+                <div class = "losangeInsetRight teal3"></div>
+            </div>
+            <div class = "losangeTextBoxContainer">
+                <div class = "losangeTextBoxTopTriangle teal1"></div>
+                <div class = "losangeTextBox textBoxTypo teal1">
+                    <p>Sometime before 2019 I started to realize that I had become severely bored. I was slogging through work that I knew I could breeze through blindfolded. I tried making up weird challenges for myself or using different than usual techniques, but it didn’t work. What I really needed was a breakthrough, like the time I locked myself in for three months to make that animation.
+                    <br><br>
+                    As I've always looked at these website things and wondered how they work, I decided upon front-end web development, as it synergises nicely with a lot of what I already know.
+                    <br><br>
+                    I had previously made some forays into modifying templates for Wordpress, but I really needed to go at it in a structured manner. This website is part of those efforts and was <a href = "https://codepen.io/pdgper/pen/wvWvrqP" target = "_blank">coded from scratch by myself</a> to be responsive and mobile-first. It’s also the final exercise in the <a href = "https://www.coursera.org/user/8c8a177136a5c7294b61c2966da30d38" target="_blank">University of Michigan “Web Design for Everybody: Basics of Web Development & Coding Specialization” course</a> that teaches the basics of HTML, CSS, JavaScript and Bootstrap.
+                    </p>
+                </div>
+                <div class = "losangeTextBoxBottomTriangle teal1"></div>
+            </div>
+        </section>
+
+        <!-- ==================
+        CONTENT | LOSANGE BLOCK
+        =================== -->
+        <section class = "losangeBlock teal2"> 
+            <div class = "losangeImageContainer">
+                <video class = "losangeImage" autoplay loop muted>
+                    <source src = "vid/losange_coding.mp4" type = "video/mp4">
+                </video>
+                <div class = "losangeInsetLeft teal4"></div>
+                <div class = "losangeInsetRight teal3"></div>
+            </div>
+            <div class = "losangeTextBoxContainer">
+                <div class = "losangeTextBoxTopTriangle teal1"></div>
+                <div class = "losangeTextBox textBoxTypo teal1">
+                    <p>I was expecting the process to be more onerous than what it ended up being. In fact, I was surprised at how enjoyable it was solving all the little geometry and logic puzzles involved in CSS and JavaScript. Meanwhile, I found a lot of overlap in skills. CSS z-index positioning is like layers in image editing; transitions and animations are like keyframes in animation; clip-path is vector work, and so on.
+                    <br><br>
+                    Honestly, the hardest part was wrapping my mind around the box model. One usually employs a grid to make sure all your elements keep nice and aligned. Whoever heard of a grid that keeps shifting everything around every time you add a picture to it?
+                    <br><br>
+                    So that’s my pitch. You can find me at [ <a href = "https://www.linkedin.com/in/pdgper/" target="_blank">LinkedIn</a> | <a href = "https://twitter.com/pdgper" target="_blank">Twitter</a> | <a href = "mailto: pdgper@gmail.com">Email</a> ]
+                </div>
+                <div class = "losangeTextBoxBottomTriangle teal1"></div>
+            </div>
+        </section>
+
+    </main>
+
+
+
+    <footer>
+        
+        <!-- ==========================
+        NAVIGATION | BACK TO TOP BUTTON 
+        =========================== -->
+        <nav>
+            <div id = "backToTopButton" class = "magenta1" onclick = "backToTopFunction()">
+                <div id = "backToTopArrow"></div>
+            </div>
+        </nav>
+
+    </footer>
+
+
+
+    <script src="script.js"></script> 
+
+</body>
+
+</html>
